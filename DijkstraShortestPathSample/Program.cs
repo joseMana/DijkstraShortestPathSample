@@ -4,27 +4,10 @@ using static System.Console;
 
 namespace DijkstraShortestPathSample
 {
-    public class Position
-    {
-        public static int SPEED = 10;
-        public static int GRID_SCALE = 50;
-        public int X { get; set; }
-        public int Y { get; set; }
-        public static Position CreatePosition()
-        {
-            return new Position
-            {
-                X = new Random().Next(0, GRID_SCALE),
-                Y = new Random().Next(0, GRID_SCALE)
-            };
-        }
-        public override string ToString()
-        {
-            return $"X = {X}, Y = {Y}";
-        }
-    }
+    
     class Program
     {
+        public static int GRID_SCALE = 50;
         public static Position ENDGAME_POS = Position.CreatePosition();
         public static Position PLAYER_POS = Position.CreatePosition();
         static void Main(string[] args)
@@ -58,7 +41,7 @@ namespace DijkstraShortestPathSample
 
             };
 
-            Position best = null;
+            Position best = new Position();
             double min = 100000000000000;
             for (var i = 0; i < neighbors.Count; i++)
             {
@@ -82,6 +65,23 @@ namespace DijkstraShortestPathSample
             var dist = Math.Sqrt(xs + ys);
 
             return dist;
+        }
+        public struct Position
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+            public static Position CreatePosition()
+            {
+                return new Position
+                {
+                    X = new Random().Next(0, GRID_SCALE),
+                    Y = new Random().Next(0, GRID_SCALE)
+                };
+            }
+            public override string ToString()
+            {
+                return $"X = {X}, Y = {Y}";
+            }
         }
     }
 }
